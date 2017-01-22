@@ -32,7 +32,7 @@ UINavigationControllerDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     
-    //Tells the delegate that the user picked a still image 
+    //Tells the delegate that the user picked a still image
     }
     func imagePickerControllerDidCancel(_: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
