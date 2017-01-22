@@ -15,18 +15,24 @@ UINavigationControllerDelegate {
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var imagePickerView: UIImageView!
     
-//    let memeDelegate = MemeTextFieldDelegate()
-//    
-//    let memeTextAttributes = [
-//        NSStrokeColorAttributeName : UIColor.blackColor(),
-//        NSForegroundColorAttributeName: UIColor.whiteColor(),
-//        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-//        NSStrokeWidthAttributeName : -4.0
-//    ]
-
+    let memeDelegate = MemeTextFieldDelegate()
+    
+    // set text attributes
+    let memeTextAttributes = [
+    NSStrokeColorAttributeName : UIColor.black,
+    NSForegroundColorAttributeName: UIColor.white,
+    NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+    NSStrokeWidthAttributeName : -4.0
+    ] as [String : Any]
+    
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set text boxes behaviors
+        self.bottomTextField.delegate = memeDelegate
+        self.topTextField.delegate = memeDelegate
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.defaultTextAttributes = memeTextAttributes
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
