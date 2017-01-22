@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALy-Bj-X7e">
-                                <rect key="frame" x="65" y="210" width="246" height="246"/>
+                                <rect key="frame" x="64.5" y="210" width="246" height="246"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -33,6 +33,11 @@
                                     <barButtonItem title="Pick" id="AGY-rM-vMs">
                                         <connections>
                                             <action selector="pickAnImage:" destination="BYZ-38-t0r" id="kUp-6g-pxz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Camera Button" id="2g9-Fc-3xD">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="CeG-cB-nef"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -54,6 +59,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraButton" destination="2g9-Fc-3xD" id="tTf-DQ-cTz"/>
                         <outlet property="imagePickerView" destination="ALy-Bj-X7e" id="vfb-4K-Fzm"/>
                     </connections>
                 </viewController>
