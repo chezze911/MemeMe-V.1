@@ -30,13 +30,19 @@ UINavigationControllerDelegate {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imagePickerView.image = image
             self.dismiss(animated: true, completion: nil)
+            //Tells the delegate that the user picked a still image
         }
-    
-    //Tells the delegate that the user picked a still image
     }
     func imagePickerControllerDidCancel(_: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
+        //Tells the delegate that the user cancelled the pick operation.
     }
-    //Tells the delegate that the user cancelled the pick operation.
+    @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .camera
+        present(imagePicker, animated: true, completion: nil)
+    }
 }
 
