@@ -1,5 +1,5 @@
 //
-//  MemeMetextfieldDelegate.swift
+//  MemeTextFieldDelegate.swift
 //  MemeMe V.1
 //
 //  Created by Chi Nguyen on 1/22/17.
@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-
 import UIKit
 
 class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
