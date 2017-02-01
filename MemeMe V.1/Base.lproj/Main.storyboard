@@ -27,12 +27,12 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZH-zL-pxP">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="bottomBar" translatesAutoresizingMaskIntoConstraints="NO" id="gZH-zL-pxP" userLabel="bottomBar">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="Pick" id="AGY-rM-vMs">
                                         <connections>
-                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="kUp-6g-pxz"/>
+                                            <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="WAI-cm-fIa"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Camera" id="2g9-Fc-3xD" userLabel="Camera">
@@ -40,7 +40,11 @@
                                             <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="CeG-cB-nef"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Share" id="7Ta-kX-Pad" userLabel="Share"/>
+                                    <barButtonItem title="Cancel" id="A3a-hg-hyS">
+                                        <connections>
+                                            <action selector="cancelAction:" destination="BYZ-38-t0r" id="P21-rI-DLI"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="BOTTOM" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9eU-U4-dvH" userLabel="bottomTextField">
@@ -57,6 +61,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="topBar" translatesAutoresizingMaskIntoConstraints="NO" id="cdr-Dh-Cdn" userLabel="topBar">
+                                <rect key="frame" x="1" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Share" id="wHK-ow-6Od">
+                                        <connections>
+                                            <action selector="share:" destination="BYZ-38-t0r" id="wTO-a5-utE"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -84,12 +99,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityBar" destination="7Ta-kX-Pad" id="3N0-55-p0P"/>
                         <outlet property="bottomTextField" destination="9eU-U4-dvH" id="2Jj-j9-JoS"/>
                         <outlet property="cameraButton" destination="2g9-Fc-3xD" id="tTf-DQ-cTz"/>
                         <outlet property="imagePickerView" destination="ALy-Bj-X7e" id="vfb-4K-Fzm"/>
-                        <outlet property="toolbar" destination="gZH-zL-pxP" id="gIZ-Bz-zNP"/>
+                        <outlet property="shareButton" destination="wHK-ow-6Od" id="CKq-aJ-Add"/>
+                        <outlet property="topBar" destination="cdr-Dh-Cdn" id="yAE-Sw-Ll0"/>
                         <outlet property="topTextField" destination="bMc-F6-EcG" id="YzC-Bl-u6d"/>
+                        <outletCollection property="bottomBar" destination="gZH-zL-pxP" collectionClass="NSMutableArray" id="cnT-Qo-gz8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

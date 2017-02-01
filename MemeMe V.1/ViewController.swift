@@ -11,16 +11,16 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
-    @IBOutlet weak var toolbar: UIToolbar!
 
+    @IBOutlet weak var bottomBar: UIToolbar!
+    @IBOutlet weak var topBar: UIToolbar!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     let memeDelegate = MemeTextFieldDelegate()
-    
-    @IBOutlet weak var activityBar: UIBarButtonItem!
     // set text attributes
     let memeTextAttributes = [
     NSStrokeColorAttributeName : UIColor.black,
@@ -37,6 +37,8 @@ UINavigationControllerDelegate {
         self.bottomTextField.delegate = memeDelegate
         topTextField.defaultTextAttributes = self.memeTextAttributes
         bottomTextField.defaultTextAttributes = self.memeTextAttributes
+        topTextField.textAlignment = .center
+        bottomTextField.textAlignment = .center
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
     }
@@ -44,17 +46,23 @@ UINavigationControllerDelegate {
         super.viewWillAppear(animated)
          //enables camera button only if camera is available
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+        if imagePickerView.image == nil {
+            shareButton.isEnabled = false
+        } else {
+            shareButton.isEnabled = true
+        }
         
         //notifies when keyboard appears
         subscribeToKeyboardNotifications()
     }
     //opens camera roll to allow photo selection
-    @IBAction func pickAnImage(_ sender:Any) {
+    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
         present(pickerController, animated: true, completion: nil)
     }
+
     //enables user to take a photo
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
         let pickerController = UIImagePickerController()
@@ -106,49 +114,56 @@ UINavigationControllerDelegate {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
+    
+    func save() {
+        // create the meme
+        let memedImage : UIImage =
+            UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        _ = Meme(topTextField: topTextField.text! as NSString, bottomTextField: bottomTextField.text! as NSString, image: imagePickerView.image!, memedImage: memedImage)
+    }
     func generateMemedImage() -> UIImage {
+        
+        // Hide toolbar and navbar
+        topBar.isHidden = true
+        bottomBar.isHidden = true
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        view.drawHierarchy(in: self.view.frame,
+                                     afterScreenUpdates: true)
+        let memedImage : UIImage =
+            UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        
+        // Show toolbar and navbar
+        topBar.isHidden = false
+        bottomBar.isHidden = false
         
         return memedImage
     }
-    
-    // Use action button to share meme
-    @IBAction func share(sender: AnyObject) {
+    //share meme
+    @IBAction func share(_ sender: Any) {
         let memedImage = generateMemedImage()
         let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = { (s: String?, ok: Bool, items: [AnyObject]?, err: NSError?) -> Void in
-            if ok {
-                self.save()
-                NSLog("Successfully saved meme image.")
-            } else if err != nil {
-                NSLog("Error: \(err)")
-            } else {
-                NSLog("User clicked cancel")
-            }
-        }
         
         present(activityViewController, animated: true, completion: nil)
+        
+        activityViewController.completionWithItemsHandler = {(activityType: UIActivityType?, completed:Bool, returnedItems:[Any]?, error: Error?) in
+            if !completed {
+                print("cancelled")
+                return
+            }else{
+                print("completed")
+            }
+        }
     }
-    
-    // create the meme
-    func save() {
-        let meme = Meme(topTextField: topTextField.text! as NSString, bottomTextField: bottomTextField.text! as NSString, image:
-            imagePickerView.image!, memedImage: generateMemedImage())
-        (UIApplication.sharedApplication.delegate as! AppDelegate).memes.append(meme)
-    }
-    
-    // clear the text and image when cancel is pressed
-    @IBAction func cancelAction(sender: AnyObject) {
+    // clear the text and image
+    @IBAction func cancelAction(_ sender: Any) {
         imagePickerView.image = nil
         topTextField.text?.removeAll()
         bottomTextField.text?.removeAll()
         viewDidLoad()
     }
-    
 }
 

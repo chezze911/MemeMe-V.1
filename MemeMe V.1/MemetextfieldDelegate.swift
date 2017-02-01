@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
-    // Text Field Delegate Methods
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -18,13 +17,10 @@ class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
             textField.text = ""
         }
         
-        // Figure out what the new text will be, if we return true
         var newText: NSString = textField.text! as NSString
+  
         newText = newText.replacingCharacters(in: range, with: string) as NSString
-        
-        
-        
-        // returning true gives the text field permission to change its text
+
         return true;
     }
     
