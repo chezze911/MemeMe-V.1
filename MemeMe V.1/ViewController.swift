@@ -26,7 +26,7 @@ UINavigationControllerDelegate {
     NSStrokeColorAttributeName : UIColor.black,
     NSForegroundColorAttributeName : UIColor.white,
     NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-    NSStrokeWidthAttributeName : -4.0,
+    NSStrokeWidthAttributeName : -3.0,
     ] as [String : Any]
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -34,12 +34,13 @@ UINavigationControllerDelegate {
         super.viewDidLoad()
         // Set behaviors of top and bottom text fields
         self.topTextField.delegate = memeDelegate
-        self.bottomTextField.delegate = memeDelegate
         topTextField.defaultTextAttributes = self.memeTextAttributes
-        bottomTextField.defaultTextAttributes = self.memeTextAttributes
         topTextField.textAlignment = .center
-        bottomTextField.textAlignment = .center
         topTextField.text = "TOP"
+        
+        self.bottomTextField.delegate = memeDelegate
+        bottomTextField.defaultTextAttributes = self.memeTextAttributes
+        bottomTextField.textAlignment = .center
         bottomTextField.text = "BOTTOM"
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -70,27 +71,29 @@ UINavigationControllerDelegate {
         pickerController.sourceType = .camera
         present(pickerController, animated: true, completion: nil)
     }
+    
     //Tells the delegate that the user picked a still image and sends photo user selected to image viewer and formats to fit
     func imagePickerController(_ sender: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePickerView.image = image
+            dismiss(animated: true, completion: nil)
         }
         
-        dismiss(animated: true, completion: nil)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
     //Keyboard
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
     //moves frame up when keyboard shows
     func keyboardWillShow(_ notification:Notification) {
         self.view.frame.origin.y = 0 - getKeyboardHeight(notification)
+    }
+    func keyboardWillHide(notification: NSNotification) {
+        if bottomTextField.isFirstResponder {
+            view.frame.origin.y = 0 + getKeyboardHeight(notification as Notification)
+        }
     }
     //gets keyboard height to move up frame
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
@@ -104,7 +107,7 @@ UINavigationControllerDelegate {
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
     }
-    //turns notification off
+    
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
     }
@@ -117,10 +120,14 @@ UINavigationControllerDelegate {
     
     func save() {
         // create the meme
-        let memedImage : UIImage =
-            UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        _ = Meme(topTextField: topTextField.text! as NSString, bottomTextField: bottomTextField.text! as NSString, image: imagePickerView.image!, memedImage: memedImage)
+        let memedImage = generateMemedImage()
+        
+        let meme = Meme(topTextField: topTextField.text! as NSString, bottomTextField: bottomTextField.text! as NSString,
+                        image: imagePickerView.image!, memedImage: memedImage)
+        
+        // Add it to the memes array in the Application Delegate
+        (UIApplication.shared.delegate as!
+            AppDelegate).memes.append(meme)
     }
     func generateMemedImage() -> UIImage {
         
@@ -142,21 +149,17 @@ UINavigationControllerDelegate {
         
         return memedImage
     }
+
     //share meme
     @IBAction func share(_ sender: Any) {
         let memedImage = generateMemedImage()
         let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
-        present(activityViewController, animated: true, completion: nil)
-        
-        activityViewController.completionWithItemsHandler = {(activityType: UIActivityType?, completed:Bool, returnedItems:[Any]?, error: Error?) in
-            if !completed {
-                print("cancelled")
-                return
-            }else{
-                print("completed")
-            }
+        activityViewController.completionWithItemsHandler = { activity, success, items, error in
+            self.save()
+            self.dismiss(animated: true, completion: nil)
         }
+        present(activityViewController, animated: true, completion: nil)
     }
     // clear the text and image
     @IBAction func cancelAction(_ sender: Any) {
