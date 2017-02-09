@@ -155,11 +155,14 @@ UINavigationControllerDelegate {
         let memedImage = generateMemedImage()
         let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
-        activityViewController.completionWithItemsHandler = { activity, success, items, error in
-            self.save()
-            self.dismiss(animated: true, completion: nil)
+        activityViewController.completionWithItemsHandler = { activity, completed, returned, error in
+            //Allows meme to be saved if activity is completed
+            if completed{
+                self.save()
+                self.dismiss(animated: true, completion: nil)
+            }
+        self.present(activityViewController, animated: true, completion: nil)
         }
-        present(activityViewController, animated: true, completion: nil)
     }
     // clear the text and image
     @IBAction func cancelAction(_ sender: Any) {
