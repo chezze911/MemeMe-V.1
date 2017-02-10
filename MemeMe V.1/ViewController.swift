@@ -96,7 +96,7 @@ UINavigationControllerDelegate {
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: NSNotification) {
         view.frame.origin.y = 0 // (0,0) is the original view location
     }
     //gets keyboard height to move up frame
@@ -110,7 +110,7 @@ UINavigationControllerDelegate {
     //notifies when keyboard raises
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
