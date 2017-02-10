@@ -158,8 +158,13 @@ UINavigationControllerDelegate {
 
     //share meme
     @IBAction func share(_ sender: Any) {
+        
+        print("In @IBAction func share(_ sender: Any)...")
         let memedImage = generateMemedImage()
+        
+        
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        print("\tdone with instantiate activityCotroller...")
         
         activityController.completionWithItemsHandler = { activity, completed, returned, error in
             //Allows meme to be saved if activity is completed
@@ -167,8 +172,12 @@ UINavigationControllerDelegate {
                 self.save()
                 self.dismiss(animated: true, completion: nil)
             }
-        self.present(activityController, animated: true, completion: nil)
+        //self.present(activityController, animated: true, completion: nil)
         }
+        print("\twill present the activityControler")
+        self.present(activityController, animated: true, completion: nil)
+        print("\tdone presenting the activityControler")
+        
     }
     // clear the text and image
     @IBAction func cancelAction(_ sender: Any) {
