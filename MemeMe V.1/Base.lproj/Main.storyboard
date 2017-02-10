@@ -23,18 +23,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALy-Bj-X7e">
-                                <rect key="frame" x="65" y="161" width="191" height="246"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="246" id="lj2-Ll-DDx"/>
-                                </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="bottom" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="BOTTOM" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9eU-U4-dvH" userLabel="bottomTextField">
-                                <rect key="frame" x="132.5" y="376.5" width="56" height="15"/>
+                                <rect key="frame" x="16" y="475" width="288" height="40"/>
                                 <accessibility key="accessibilityConfiguration" identifier="bottomTextField"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="V7J-nf-zxC"/>
+                                </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" spellCheckingType="no"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" restorationIdentifier="bottomBar" translatesAutoresizingMaskIntoConstraints="NO" id="gZH-zL-pxP" userLabel="bottomBar">
@@ -71,28 +71,33 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="top" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-F6-EcG" userLabel="topTextField">
-                                <rect key="frame" x="132.5" y="182.5" width="56" height="15"/>
+                                <rect key="frame" x="16" y="53" width="288" height="40"/>
                                 <accessibility key="accessibilityConfiguration" identifier="topTextField"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Kb9-wU-BHl"/>
+                                </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ALy-Bj-X7e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="49" id="5qm-Ya-DYS"/>
-                            <constraint firstItem="bMc-F6-EcG" firstAttribute="trailing" secondItem="9eU-U4-dvH" secondAttribute="trailing" id="HQB-KN-S7w"/>
-                            <constraint firstItem="bMc-F6-EcG" firstAttribute="centerX" secondItem="ALy-Bj-X7e" secondAttribute="centerX" constant="-0.25" id="KAT-cE-ZUw"/>
-                            <constraint firstItem="ALy-Bj-X7e" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LZS-cj-WLS"/>
+                            <constraint firstItem="ALy-Bj-X7e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="61u-Jk-5XB"/>
+                            <constraint firstItem="9eU-U4-dvH" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="695-Zh-WEh"/>
                             <constraint firstItem="cdr-Dh-Cdn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-15" id="NS4-IF-6Vc"/>
                             <constraint firstItem="gZH-zL-pxP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="QUZ-BE-Fa4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cdr-Dh-Cdn" secondAttribute="trailing" constant="-17" id="TLT-lC-Rqp"/>
-                            <constraint firstItem="9eU-U4-dvH" firstAttribute="top" secondItem="ALy-Bj-X7e" secondAttribute="bottom" constant="-30.5" id="Wk1-6G-y03"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gZH-zL-pxP" secondAttribute="bottom" id="Wpc-0V-vqk"/>
+                            <constraint firstItem="bMc-F6-EcG" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="X5r-l2-lzn"/>
                             <constraint firstItem="cdr-Dh-Cdn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dpK-Ze-KlG"/>
-                            <constraint firstItem="bMc-F6-EcG" firstAttribute="leading" secondItem="9eU-U4-dvH" secondAttribute="leading" id="dzs-tJ-7K3"/>
-                            <constraint firstItem="ALy-Bj-X7e" firstAttribute="centerX" secondItem="cdr-Dh-Cdn" secondAttribute="centerX" id="faM-vv-omy"/>
+                            <constraint firstItem="gZH-zL-pxP" firstAttribute="top" secondItem="ALy-Bj-X7e" secondAttribute="bottom" id="fGa-Qb-Z3C"/>
+                            <constraint firstItem="bMc-F6-EcG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="h2h-ab-oMU"/>
+                            <constraint firstItem="bMc-F6-EcG" firstAttribute="top" secondItem="cdr-Dh-Cdn" secondAttribute="bottom" constant="9" id="rWv-lE-wlN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gZH-zL-pxP" secondAttribute="trailing" constant="-16" id="sZP-zO-6Bk"/>
-                            <constraint firstItem="ALy-Bj-X7e" firstAttribute="top" secondItem="bMc-F6-EcG" secondAttribute="bottom" constant="-36.5" id="xUS-3t-a7u"/>
+                            <constraint firstItem="gZH-zL-pxP" firstAttribute="top" secondItem="9eU-U4-dvH" secondAttribute="bottom" constant="9" id="tCc-4c-oih"/>
+                            <constraint firstAttribute="trailing" secondItem="ALy-Bj-X7e" secondAttribute="trailing" id="vHv-L5-sf6"/>
+                            <constraint firstItem="9eU-U4-dvH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="xWM-VV-ctX"/>
+                            <constraint firstItem="ALy-Bj-X7e" firstAttribute="top" secondItem="cdr-Dh-Cdn" secondAttribute="bottom" id="yyp-bF-lj5"/>
                         </constraints>
                     </view>
                     <connections>
@@ -108,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="255" y="96"/>
+            <point key="canvasLocation" x="-90" y="84.507042253521121"/>
         </scene>
     </scenes>
 </document>
