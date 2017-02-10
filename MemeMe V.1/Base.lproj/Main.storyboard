@@ -40,7 +40,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" restorationIdentifier="bottomBar" translatesAutoresizingMaskIntoConstraints="NO" id="gZH-zL-pxP" userLabel="bottomBar">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="NVg-N3-hhd"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="g0a-6l-QSn"/>
                                     <barButtonItem title="Album" id="AGY-rM-vMs">
                                         <connections>
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="WAI-cm-fIa"/>
@@ -51,7 +51,7 @@
                                             <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="CeG-cB-nef"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="POw-0x-8d1"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Vk2-1f-847"/>
                                 </items>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" restorationIdentifier="topBar" translatesAutoresizingMaskIntoConstraints="NO" id="cdr-Dh-Cdn" userLabel="topBar">
@@ -62,7 +62,7 @@
                                             <action selector="share:" destination="BYZ-38-t0r" id="wTO-a5-utE"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0VE-1R-aok"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="b1G-i0-h6G"/>
                                     <barButtonItem title="Cancel" id="A3a-hg-hyS">
                                         <connections>
                                             <action selector="cancelAction:" destination="BYZ-38-t0r" id="P21-rI-DLI"/>
@@ -97,13 +97,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomBar" destination="gZH-zL-pxP" id="YGX-gN-wFJ"/>
                         <outlet property="bottomTextField" destination="9eU-U4-dvH" id="2Jj-j9-JoS"/>
                         <outlet property="cameraButton" destination="2g9-Fc-3xD" id="tTf-DQ-cTz"/>
+                        <outlet property="cancelButton" destination="A3a-hg-hyS" id="Ylo-HL-orH"/>
                         <outlet property="imagePickerView" destination="ALy-Bj-X7e" id="vfb-4K-Fzm"/>
                         <outlet property="shareButton" destination="wHK-ow-6Od" id="CKq-aJ-Add"/>
-                        <outlet property="topBar" destination="cdr-Dh-Cdn" id="yAE-Sw-Ll0"/>
+                        <outlet property="topBar" destination="cdr-Dh-Cdn" id="nPx-vD-ZjI"/>
                         <outlet property="topTextField" destination="bMc-F6-EcG" id="YzC-Bl-u6d"/>
-                        <outletCollection property="bottomBar" destination="gZH-zL-pxP" collectionClass="NSMutableArray" id="cnT-Qo-gz8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

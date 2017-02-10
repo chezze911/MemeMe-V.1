@@ -12,6 +12,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
 
+    
     @IBOutlet weak var bottomBar: UIToolbar!
     @IBOutlet weak var topBar: UIToolbar!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -19,6 +20,7 @@ UINavigationControllerDelegate {
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     let memeDelegate = MemeTextFieldDelegate()
     // set text attributes
@@ -106,6 +108,7 @@ UINavigationControllerDelegate {
     //notifies when keyboard raises
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: "keyboardWillHide:", name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
@@ -153,15 +156,15 @@ UINavigationControllerDelegate {
     //share meme
     @IBAction func share(_ sender: Any) {
         let memedImage = generateMemedImage()
-        let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
-        activityViewController.completionWithItemsHandler = { activity, completed, returned, error in
+        activityController.completionWithItemsHandler = { activity, completed, returned, error in
             //Allows meme to be saved if activity is completed
             if completed{
                 self.save()
                 self.dismiss(animated: true, completion: nil)
             }
-        self.present(activityViewController, animated: true, completion: nil)
+        self.present(activityController, animated: true, completion: nil)
         }
     }
     // clear the text and image
