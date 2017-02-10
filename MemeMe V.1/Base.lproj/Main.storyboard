@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="height" constant="246" id="lj2-Ll-DDx"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="bottom" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="BOTTOM" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9eU-U4-dvH" userLabel="bottomTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="bottom" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="BOTTOM" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9eU-U4-dvH" userLabel="bottomTextField">
                                 <rect key="frame" x="160" y="426" width="56" height="15"/>
                                 <accessibility key="accessibilityConfiguration" identifier="bottomTextField"/>
                                 <nil key="textColor"/>
@@ -70,7 +70,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="top" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-F6-EcG" userLabel="topTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="top" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-F6-EcG" userLabel="topTextField">
                                 <rect key="frame" x="160" y="232" width="56" height="15"/>
                                 <accessibility key="accessibilityConfiguration" identifier="topTextField"/>
                                 <nil key="textColor"/>
@@ -85,15 +85,15 @@
                             <constraint firstItem="bMc-F6-EcG" firstAttribute="centerX" secondItem="ALy-Bj-X7e" secondAttribute="centerX" constant="-0.25" id="KAT-cE-ZUw"/>
                             <constraint firstItem="ALy-Bj-X7e" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LZS-cj-WLS"/>
                             <constraint firstItem="cdr-Dh-Cdn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-15" id="NS4-IF-6Vc"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9eU-U4-dvH" secondAttribute="bottom" constant="226" id="PvU-AW-Llk" userLabel="Bottom Layout Guide.top = bottomTextField.bottom + 40"/>
                             <constraint firstItem="gZH-zL-pxP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="QUZ-BE-Fa4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cdr-Dh-Cdn" secondAttribute="trailing" constant="-17" id="TLT-lC-Rqp"/>
+                            <constraint firstItem="9eU-U4-dvH" firstAttribute="top" secondItem="ALy-Bj-X7e" secondAttribute="bottom" constant="-30.5" id="Wk1-6G-y03"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gZH-zL-pxP" secondAttribute="bottom" id="Wpc-0V-vqk"/>
                             <constraint firstItem="cdr-Dh-Cdn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dpK-Ze-KlG"/>
                             <constraint firstItem="bMc-F6-EcG" firstAttribute="leading" secondItem="9eU-U4-dvH" secondAttribute="leading" id="dzs-tJ-7K3"/>
-                            <constraint firstItem="bMc-F6-EcG" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="232" id="eGB-yr-3Gd" userLabel="topTextField.top = top + 40"/>
                             <constraint firstItem="ALy-Bj-X7e" firstAttribute="centerX" secondItem="cdr-Dh-Cdn" secondAttribute="centerX" id="faM-vv-omy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gZH-zL-pxP" secondAttribute="trailing" constant="-16" id="sZP-zO-6Bk"/>
+                            <constraint firstItem="ALy-Bj-X7e" firstAttribute="top" secondItem="bMc-F6-EcG" secondAttribute="bottom" constant="-36.5" id="xUS-3t-a7u"/>
                         </constraints>
                     </view>
                     <connections>

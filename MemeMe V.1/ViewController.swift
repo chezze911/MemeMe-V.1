@@ -45,6 +45,7 @@ UINavigationControllerDelegate {
         bottomTextField.textAlignment = .center
         bottomTextField.text = "BOTTOM"
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
          //enables camera button only if camera is available
@@ -108,7 +109,6 @@ UINavigationControllerDelegate {
     //notifies when keyboard raises
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: "keyboardWillHide:", name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
