@@ -89,14 +89,15 @@ UINavigationControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     //Keyboard
-    //moves frame up when keyboard shows
+    //moves frame up when keyboard shows only on bottom text field
     func keyboardWillShow(_ notification:Notification) {
-        self.view.frame.origin.y = 0 - getKeyboardHeight(notification)
-    }
-    func keyboardWillHide(notification: NSNotification) {
-        if bottomTextField.isFirstResponder {
-            view.frame.origin.y = 0 + getKeyboardHeight(notification as Notification)
+        if bottomTextField.isFirstResponder && view.frame.origin.y == 0.0{ // check if text field is currently selected
+            view.frame.origin.y = -getKeyboardHeight(notification)
         }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0 // (0,0) is the original view location
     }
     //gets keyboard height to move up frame
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
@@ -109,10 +110,12 @@ UINavigationControllerDelegate {
     //notifies when keyboard raises
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     //unsubscribes
     override func viewWillDisappear(_ animated: Bool) {
