@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
+class MemeTextFieldDelegate: NSObject, UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -21,7 +21,7 @@ class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
   
         newText = newText.replacingCharacters(in: range, with: string) as NSString
 
-        return true;
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
