@@ -5,7 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;Just Testing!&quot;</string>
+	<string>We need to access the photos to create a meme from a stored image</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need to use the camera to create a meme from a new photo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
