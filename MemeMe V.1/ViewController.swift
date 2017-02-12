@@ -51,7 +51,7 @@ UINavigationControllerDelegate {
             alignment: .center)
         
         configureTextFields(bottomTextField:
-            text: "BOTTOM"
+            text: "BOTTOM",
             delegate: self,
             attributes: memeTextAttributes,
             alignment: .center)
