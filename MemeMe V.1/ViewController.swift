@@ -12,7 +12,6 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, UITextFieldDelegate {
 
-    
     @IBOutlet weak var bottomBar: UIToolbar!
     @IBOutlet weak var topBar: UIToolbar!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -24,7 +23,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     
     let memeDelegate = MemeTextFieldDelegate()
     
-    var sourceType: UIImagePickerControllerSourceType
+    var sourceType: UIImagePickerControllerSourceType!
     // set text attributes
     let memeTextAttributes = [
     NSStrokeColorAttributeName : UIColor.black,
@@ -33,21 +32,27 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     NSStrokeWidthAttributeName : -3.0,
     ] as [String : Any]
     
-    func configureTextFields(textField: UITextField) {
-        // code to set-up textField
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        textField.delegate = self
-        textField.defaultTextAttributes = memeTextAttributes
-        textField.textAlignment = .center
+    func configureTextFields(textField: UITextField, text: String, delegate: UITextFieldDelegate, attributes: [String : NSObject], alignment: NSTextAlignment) {
+        // code to set-up textField behaviors
+        textField.text = text
+        textField.delegate = delegate
+        textField.defaultTextAttributes = attributes
+        textField.textAlignment = alignment
     }
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set behaviors of top and bottom text fields
-        configureTextFields(textField: topTextField)
+        configureTextFields(textField: topTextField,
+                            text:"TOP",
+                            delegate: self,
+                            attributes: memeTextAttributes as! [String : NSObject],
+                            alignment: .center)
         
-        configureTextFields(textField: bottomTextField)
+        configureTextFields(textField: bottomTextField,
+                            text:"BOTTOM",
+                            delegate: self,
+                            attributes: memeTextAttributes as! [String : NSObject],
+                            alignment: .center)
         
     }
     
