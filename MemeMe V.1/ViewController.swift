@@ -26,34 +26,35 @@ UINavigationControllerDelegate {
     
     var sourceType: UIImagePickerControllerSourceType
     // set text attributes
-//    let memeTextAttributes = [
-//    NSStrokeColorAttributeName : UIColor.black,
-//    NSForegroundColorAttributeName : UIColor.white,
-//    NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-//    NSStrokeWidthAttributeName : -3.0,
-//    ] as [String : Any]
+    let memeTextAttributes = [
+    NSStrokeColorAttributeName : UIColor.black,
+    NSForegroundColorAttributeName : UIColor.white,
+    NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+    NSStrokeWidthAttributeName : -3.0,
+    ] as [String : Any]
     
     func configureTextFields(textField: UITextField) {
         // code to set-up textField
-        textField.delegate = delegate
-        textField.defaultTextAttributes = memeTextAttributes
-        textField.textAlignment = .center
         textField.text = text
-        
-        // set text attributes
-        let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.black,
-            NSForegroundColorAttributeName : UIColor.white,
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName : -3.0,
-        ] as [String : Any]
-        
+        textField.delegate = delegate
+        textField.defaultTextAttributes = attributes
+        textField.textAlignment = alignment
     }
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set behaviors of top and bottom text fields
-        configureTextFields(textField: UITextField)
+        configureTextFields(topTextField:
+            text: "TOP",
+            delegate: self,
+            attributes: memeTextAttributes,
+            alignment: .center)
+        
+        configureTextFields(bottomTextField:
+            text: "BOTTOM"
+            delegate: self,
+            attributes: memeTextAttributes,
+            alignment: .center)
         
     }
     
@@ -171,25 +172,19 @@ UINavigationControllerDelegate {
     //share meme
     @IBAction func share(_ sender: Any) {
         
-        print("In @IBAction func share(_ sender: Any)...")
         let memedImage = generateMemedImage()
         
         
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        print("\tdone with instantiate activityCotroller...")
         
         activityController.completionWithItemsHandler = { activity, completed, returned, error in
-            print("\tIn activityController.completionWithItemsHandler")
             //Allows meme to be saved if activity is completed
             if completed{
                 self.save()
                 self.dismiss(animated: true, completion: nil)
             }
-        //self.present(activityController, animated: true, completion: nil)
         }
-        print("\twill present the activityControler")
         self.present(activityController, animated: true, completion: nil)
-        print("\tdone presenting the activityControler")
         
     }
     // clear the text and image
