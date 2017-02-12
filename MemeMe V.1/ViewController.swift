@@ -131,7 +131,7 @@ UINavigationControllerDelegate {
         let meme = Meme(topTextField: topTextField.text! as NSString, bottomTextField: bottomTextField.text! as NSString,
                         image: imagePickerView.image!, memedImage: memedImage)
         
-        // Add it to the memes array in the Application Delegate
+        // Add it to the memes array in the AppDelegate
         (UIApplication.shared.delegate as!
             AppDelegate).memes.append(meme)
     }
@@ -167,6 +167,7 @@ UINavigationControllerDelegate {
         print("\tdone with instantiate activityCotroller...")
         
         activityController.completionWithItemsHandler = { activity, completed, returned, error in
+            print("\tIn activityController.completionWithItemsHandler")
             //Allows meme to be saved if activity is completed
             if completed{
                 self.save()
