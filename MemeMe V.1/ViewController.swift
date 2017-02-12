@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+UINavigationControllerDelegate, UITextFieldDelegate {
 
     
     @IBOutlet weak var bottomBar: UIToolbar!
@@ -35,26 +35,19 @@ UINavigationControllerDelegate {
     
     func configureTextFields(textField: UITextField) {
         // code to set-up textField
-        textField.text = text
-        textField.delegate = delegate
-        textField.defaultTextAttributes = attributes
-        textField.textAlignment = alignment
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        textField.delegate = self
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
     }
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set behaviors of top and bottom text fields
-        configureTextFields(topTextField:
-            text: "TOP",
-            delegate: self,
-            attributes: memeTextAttributes,
-            alignment: .center)
+        configureTextFields(textField: topTextField)
         
-        configureTextFields(bottomTextField:
-            text: "BOTTOM",
-            delegate: self,
-            attributes: memeTextAttributes,
-            alignment: .center)
+        configureTextFields(textField: bottomTextField)
         
     }
     
