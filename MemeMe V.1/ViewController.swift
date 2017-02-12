@@ -23,27 +23,38 @@ UINavigationControllerDelegate {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     let memeDelegate = MemeTextFieldDelegate()
-    // set text attributes
-    let memeTextAttributes = [
-    NSStrokeColorAttributeName : UIColor.black,
-    NSForegroundColorAttributeName : UIColor.white,
-    NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-    NSStrokeWidthAttributeName : -3.0,
-    ] as [String : Any]
     
+    var sourceType: UIImagePickerControllerSourceType
+    // set text attributes
+//    let memeTextAttributes = [
+//    NSStrokeColorAttributeName : UIColor.black,
+//    NSForegroundColorAttributeName : UIColor.white,
+//    NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+//    NSStrokeWidthAttributeName : -3.0,
+//    ] as [String : Any]
+    
+    func configureTextFields(textField: UITextField) {
+        // code to set-up textField
+        textField.delegate = delegate
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        textField.text = text
+        
+        // set text attributes
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName : UIColor.black,
+            NSForegroundColorAttributeName : UIColor.white,
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName : -3.0,
+        ] as [String : Any]
+        
+    }
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set behaviors of top and bottom text fields
-        self.topTextField.delegate = memeDelegate
-        topTextField.defaultTextAttributes = self.memeTextAttributes
-        topTextField.textAlignment = .center
-        topTextField.text = "TOP"
+        configureTextFields(textField: UITextField)
         
-        self.bottomTextField.delegate = memeDelegate
-        bottomTextField.defaultTextAttributes = self.memeTextAttributes
-        bottomTextField.textAlignment = .center
-        bottomTextField.text = "BOTTOM"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,20 +70,21 @@ UINavigationControllerDelegate {
         //notifies when keyboard appears
         subscribeToKeyboardNotifications()
     }
-    //opens camera roll to allow photo selection
-    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
+    func pickAnImageFromSource(sourceType: UIImagePickerControllerSourceType) {
+        // code to pick an image from source
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        pickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        pickerController.sourceType = sourceType
         present(pickerController, animated: true, completion: nil)
+    }
+    //opens camera roll to allow photo selection
+    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
+        pickAnImageFromSource(sourceType: UIImagePickerControllerSourceType.photoLibrary)
     }
 
     //enables user to take a photo
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .camera
-        present(pickerController, animated: true, completion: nil)
+        pickAnImageFromSource(sourceType: UIImagePickerControllerSourceType.camera)
     }
     
     //Tells the delegate that the user picked a still image and sends photo user selected to image viewer and formats to fit
