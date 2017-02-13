@@ -32,7 +32,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     NSStrokeWidthAttributeName : -3.0,
     ] as [String : Any]
     
-    func configureTextFields(textField: UITextField, text: String) {
+    func configureTextFields(_ textField: UITextField, text: String) {
         // code to set-up textField behaviors
         textField.text = text
         textField.delegate = self
@@ -42,9 +42,25 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTextFields(textField: topTextField, text:"TOP")
         
-        configureTextFields(textField: bottomTextField, text:"BOTTOM")
+        configureTextFields(topTextField, text:"TOP")
+        
+        configureTextFields(bottomTextField, text:"BOTTOM")
+        
+        // source: http://stackoverflow.com/questions/24126678/close-ios-keyboard-by-touching-anywhere-using-swift
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
