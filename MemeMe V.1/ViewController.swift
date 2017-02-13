@@ -35,7 +35,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     func configureTextFields(_ textField: UITextField, text: String) {
         // code to set-up textField behaviors
         textField.text = text
-        textField.delegate = self
+        textField.delegate = memeDelegate
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = .center
     }
@@ -104,7 +104,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     //Keyboard
     //moves frame up when keyboard shows only on bottom text field
     func keyboardWillShow(_ notification:Notification) {
-        if bottomTextField.isFirstResponder && view.frame.origin.y == 0.0{ // check if text field is currently selected
+        if bottomTextField.isFirstResponder { // check if text field is currently selected
             view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
@@ -184,7 +184,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        self.present(activityController, animated: true, completion: nil)
+        present(activityController, animated: true, completion: nil)
         
     }
     // clear the text and image
