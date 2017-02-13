@@ -32,28 +32,19 @@ UINavigationControllerDelegate, UITextFieldDelegate {
     NSStrokeWidthAttributeName : -3.0,
     ] as [String : Any]
     
-    func configureTextFields(textField: UITextField, text: String, delegate: UITextFieldDelegate, attributes: [String : NSObject], alignment: NSTextAlignment) {
+    func configureTextFields(textField: UITextField, text: String) {
         // code to set-up textField behaviors
         textField.text = text
-        textField.delegate = delegate
-        textField.defaultTextAttributes = attributes
-        textField.textAlignment = alignment
+        textField.delegate = self
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
     }
     // Do any additional setup after loading the view, typically from a nib.
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTextFields(textField: topTextField,
-                            text:"TOP",
-                            delegate: self,
-                            attributes: memeTextAttributes as! [String : NSObject],
-                            alignment: .center)
+        configureTextFields(textField: topTextField, text:"TOP")
         
-        configureTextFields(textField: bottomTextField,
-                            text:"BOTTOM",
-                            delegate: self,
-                            attributes: memeTextAttributes as! [String : NSObject],
-                            alignment: .center)
-        
+        configureTextFields(textField: bottomTextField, text:"BOTTOM")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,18 +61,16 @@ UINavigationControllerDelegate, UITextFieldDelegate {
         subscribeToKeyboardNotifications()
     }
     func pickAnImageFromSource(sourceType: UIImagePickerControllerSourceType) {
-        // code to pick an image from source
+        
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = sourceType
         present(pickerController, animated: true, completion: nil)
     }
-    //opens camera roll to allow photo selection
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         pickAnImageFromSource(sourceType: UIImagePickerControllerSourceType.photoLibrary)
     }
 
-    //enables user to take a photo
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
         pickAnImageFromSource(sourceType: UIImagePickerControllerSourceType.camera)
     }
